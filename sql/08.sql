@@ -18,32 +18,3 @@
  *    Ensure that you are not counting a customer that has rented a movie twice as 2 separate customers renting the movie.
  *    I did this by using the SELECT DISTINCT clause.
  */
-
-select
-    title
-from film
-join (
-select
-    film_id
-from (
-    select distinct
-        film_id,
-        customer_id
-    from film
-    join inventory using (film_id)
-    join rental using (inventory_id)
-    where customer_id in 
-        (select
-            customer_id
-        from film
-        join inventory using (film_id)
-        join rental using (inventory_id)
-        where
-            film_id=103
-        )
-    ) t
-group by film_id
-having
-    count(*)>2 and film_id != 103
-) t using (film_id)
-    order by title

@@ -1,3 +1,3 @@
 /*
- * Count the number of movies that contain each type of special feature.
+ * Compute the country with the most customers in it. 
  */

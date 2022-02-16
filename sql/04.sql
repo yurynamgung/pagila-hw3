@@ -1,3 +1,5 @@
 /*
- * List the name of all actors who have appeared in a movie that has the 'Behind the Scenes' special_feature
+ * List the first and last names of all actors who:
+ * 1. have appeared in at least one movie in the "Children" category,
+ * 2. but that have never appeared in any movie in the "Horror" category.
  */

@@ -1,3 +1,3 @@
 /*
- * Select the title of all 'G' rated movies that have the 'Trailers' special feature.
+ * Compute the number of customers who live outside of the US.
  */

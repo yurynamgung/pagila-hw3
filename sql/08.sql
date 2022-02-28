@@ -18,3 +18,27 @@
  *    Ensure that you are not counting a customer that has rented a movie twice as 2 separate customers renting the movie.
  *    I did this by using the SELECT DISTINCT clause.
  */
+
+with bucket_customers as (
+    select distinct customer.customer_id
+    from customer
+    join rental on (rental.customer_id = customer.customer_id)
+    join inventory on (inventory.inventory_id = rental.inventory_id)
+    join film on (film.film_id = inventory.film_id)
+    where film.title = 'BUCKET BROTHERHOOD'
+), shared_cust_film as ( -- all films with shared rental customers as bucket brotherhood
+    select distinct film.title, c1.customer_id
+    from customer c1
+    join rental on (rental.customer_id = c1.customer_id)
+    join inventory on (inventory.inventory_id = rental.inventory_id)
+    join film on (film.film_id = inventory.film_id)
+    where c1.customer_id in (select * from bucket_customers)
+), count_cust_film as (
+    select title, count(customer_id) as cust_count
+    from shared_cust_film
+    group by title
+)
+select title 
+from count_cust_film
+where cust_count > 2 and title != 'BUCKET BROTHERHOOD'
+order by title;

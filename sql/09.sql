@@ -23,4 +23,4 @@ select extract (year from rental.rental_date) "year",
     count(rental.rental_id)
 from rental
 group by rollup (year, month, day)
-order by year asc;
+order by year, month, day;
